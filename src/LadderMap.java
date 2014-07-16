@@ -1,8 +1,11 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class LadderMap {
-
+	
+	
+	
 	public int ladderRowNum;
 	public int playerNum;
 	private ArrayList<LadderCol> ladderObjectList;
@@ -66,44 +69,83 @@ public class LadderMap {
 	
 	
 	private void setLine(int row, int col, String dir) {
-		if(col < 1) {
+		if(row < 1) {
 			System.out.println("잘못 입력하셨습니다. 다시 입력해 주십시오 ");
 			return;
 		}
-		if(col > ladderObjectList.size()) {
+		if(row > ladderObjectList.size()) {
 			System.out.println("잘못 입력하셨습니다. 다시 입력해 주십시오 ");
 			return;
 		}
 		
-		if(row > ladderRowNum - 2) {
+		if(col > ladderRowNum - 2) {
 			System.out.println("잘못 입력하셨습니다. 다시 입력해 주십시오 ");
 			return;
 			
 		}
 		
-		if(row < 1) {
+		if(col < 1) {
 			System.out.println("잘못 입력하셨습니다. 다시 입력해 주십시오 ");			
 			return;
 		}
 		
-		if(col == 1 && dir == "left") {
+		if(row == 1 && dir == "left") {
 			System.out.println("왼쪽으로 선을 그을 수 없습니다. 다시 입력하십시오 ");
 			return;
 		}
 		
-		if(col == playerNum && dir == "right") {
+		if(row == playerNum && dir == "right") {
 			System.out.println("오른쪽으로 선을 그을 수 없습니다. 다시 입력하십시오 ");
 			return;
 		}
 		
-		if(dir == "left") ladderObjectList.get(col-1).ladderArray[row] = -1;
-		if(dir == "right") ladderObjectList.get(col-1).ladderArray[row] = -2;
+		if(dir == "left") ladderObjectList.get(row-1).ladderArray[col] = -1;
+		if(dir == "right") ladderObjectList.get(row-1).ladderArray[col] = -2;
 	}
 	
 	public void drawTwoLineFromLefttoRight(int row, int col) {
 		setLine(row, col, "right");
-		setLine(row, col+1, "left");
+		setLine(row+1, col, "left");
 	}
+	
+	
+	public void drawMap(LadderCol a, int row) {
+		int col = ladderObjectList.indexOf(a);
+		for (int c=0; c<playerNum; c++) {
+			LadderCol column = ladderObjectList.get(c);
+			if (col == c) {
+				column.drawCol(row);
+			} else {
+				column.drawCol(-1);
+			}
+
+		}
+		System.out.println("\n\n\n\n");
+	}
+	
+	public void makeRandomMap(int repeatNum) {
+		Random random = new Random();
+		
+		for(int i=0; i<repeatNum; i++) {
+			int row = random.nextInt(playerNum) + 1;
+			int col = random.nextInt(ladderRowNum-2)+1;
+			
+			System.out.println(row + ", " + col);
+			
+			if(checkFourNearBlank(row, col)) drawTwoLineFromLefttoRight(row, col);
+		}
+	}
+	
+	private boolean checkFourNearBlank(int row, int col) {
+		boolean first = (ladderObjectList.get(row-1).ladderArray[col] == 0);
+		boolean second = (ladderObjectList.get(row-1).getPostLadder() == null) || (ladderObjectList.get(row).ladderArray[col] == 0); 
+		boolean third = (ladderObjectList.get(row-1).getPostLadder() == null) || (ladderObjectList.get(row-1).getPostLadder().getPostLadder() == null) || (ladderObjectList.get(row+1).ladderArray[col] == 0);
+		boolean fourth = (ladderObjectList.get(row-1).getPreLadder() == null) || (ladderObjectList.get(row-2).ladderArray[col] == 0);
+		
+		return first && second && third && fourth;
+	}
+
+	
 	
 	
 	
