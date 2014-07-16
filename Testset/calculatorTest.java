@@ -1,7 +1,7 @@
 import org.junit.Assert;
 
 
-public class calculatorTest extends junit.framework.TestCase{
+public class CalculatorTest extends junit.framework.TestCase{
 	private String_calculator_Junit cal;
 	
 	protected void setUp() throws Exception {
