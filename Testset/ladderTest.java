@@ -10,7 +10,7 @@ public class LadderTest extends TestCase {
 		obj = new LadderGameMaster();
 		map = new LadderMap(6, 10);
 		
-		map.makeRandomMap(100);
+		map.makeRandomMap(10);
 		
 //		map.drawTwoLineFromLefttoRight(1, 1);
 //		map.drawTwoLineFromLefttoRight(6, 1);
