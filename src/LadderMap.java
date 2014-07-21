@@ -115,22 +115,22 @@ public class LadderMap {
 		setLine(colNum, rowNum, "right");
 		setLine(colNum+1, rowNum, "left");
 	}
-
+	
 	//맵을 그리는 함수이다. 테스트 함수에서 이 함수를 호출하며, 맵의 객체들을 얻어 와서, 현재 별이 위치한 곳인지 확인하고, 위치한 곳이라면 별을 그리는 함수를 호출, 아니면 그냥 선을 그리는 함수를 호출한다.
-	public void drawMap(LadderCol a, int row) {
-		int col = ladderObjectList.indexOf(a);
-		for (int objectNum=0; objectNum<playerNum; objectNum++) {
-			LadderCol column = ladderObjectList.get(objectNum);
-			if (col == objectNum) {
-				column.drawCol(row);
-				continue;
+		public void drawMap(LadderCol a, int row) {
+			int col = ladderObjectList.indexOf(a);
+			for (int objectNum=0; objectNum<playerNum; objectNum++) {
+				LadderCol column = ladderObjectList.get(objectNum);
+				if (col == objectNum) {
+					column.drawCol(row);
+					continue;
+				}
+				
+				column.drawCol(-1);
 			}
-			
-			column.drawCol(-1);
+			System.out.println("\n\n\n\n");
 		}
-		System.out.println("\n\n\n\n");
-	}
-
+		
 	//랜덤으로 선을 긋는 좌표를 생성해주는 메소드이다.
 	public void makeRandomMap(int repeatNum) {
 		Random random = new Random();
