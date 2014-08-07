@@ -147,6 +147,12 @@ public class LadderMap {
 
 	//좌표를 찍었을 때, 그 곳에 선이 그어져도 괜찮은지 확인하는 메소드이다.
 	private boolean checkFourNearBlank(int colNum, int rowNum) {
+		/**
+		 * 이 부분의 로직을 LadderCol이나 다른 곳으로 위임한다.
+		 * (ladderObjectList.get(colNum-1).getPostLadder() == null)은 전형적으로 객체를 잘 활용하지 못하는 부분이다.
+		 * 로직의 복잡도가 너무 높다. 
+		 * 이 부분을 리팩토링하면서 객체 지향의 맛을 한번 느껴볼 수 있는 좋은 코드라 생각한다.
+		 */
 		boolean first = (ladderObjectList.get(colNum-1).ladderArray[rowNum] == 0);
 		boolean second = (ladderObjectList.get(colNum-1).getPostLadder() == null) || (ladderObjectList.get(colNum).ladderArray[rowNum] == 0); 
 		boolean third = (ladderObjectList.get(colNum-1).getPostLadder() == null) || (ladderObjectList.get(colNum-1).getPostLadder().getPostLadder() == null) || (ladderObjectList.get(colNum+1).ladderArray[rowNum] == 0);

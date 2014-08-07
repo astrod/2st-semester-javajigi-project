@@ -41,6 +41,11 @@ public class LadderCol {
 				colString += "★";
 			else colString += "━";
 
+			/**
+			 * 다음 if/else 제거해 본다.
+			 * 각 상태에 대한 enum 또는 클래스를 만들어 제거 가능하다.
+			 * 객체 지향의 다형성 개념 활용해 제거 시도해 본다. from javajigi
+			 */
 			if (i == LEFT)
 				colString += "┻";
 			else if (i == RIGHT)

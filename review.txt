@@ -1,0 +1,9 @@
+* LadderCol의 drawCol method의 다음 if/else 제거해 본다.
+if (i == LEFT)
+	colString += "┻";
+else if (i == RIGHT)
+	colString += "┳";
+else
+	colString += "━";
+				
+* 
