@@ -51,6 +51,11 @@ public class LadderMap {
 	private void setFirstValue() {
 		int i =1;
 		for(LadderCol object : colArray) {
+			/**
+			 * object를 초기화하는데 자기 자신을 또 다시 인자로 전달할 필요는 없을 듯하다. 
+			 * object에게 초기화하라는 메시지를 전달하고 자신의 작업은 끝난다.
+			 * from javajigi
+			 */
 			object.setInitialValue(object, i);
 			i += 1;
 		}

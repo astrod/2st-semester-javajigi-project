@@ -3,10 +3,17 @@
  */
 
 public class LadderCol {
+	/**
+	 * 각 int값. 즉 사다리의 각 점을 객체 추출해 본다.
+	 * 객체로 추출한 후 로직을 이 객체로 위임하는 리팩토링 해본다. from javajigi
+	 */
 	private int [] colLadderArray;
 	private LadderCol preLadder;
 	private LadderCol postLadder;
 	
+	/**
+	 * Direction과 같은 이름으로 enum을 만들어 제거해 본다.
+	 */
 	public static final int NORMAL = 0;
 	public static final int LEFT = -1;
 	public static final int RIGHT = -2;
@@ -51,6 +58,9 @@ public class LadderCol {
 		if(colLadderArray[startIdx] >= 1) master.endPos = colLadderArray[startIdx];
 		
 		//입력한 값에 맞춰서 사다리를 재귀적으로 내려간다.
+		/**
+		 * 앞에서 각 점을 담당하는 객체를 추출한다면 이 로직을 추출한 객체에 위임해서 작업 가능하도록 리팩토링해본다. from javajigi
+		 */
 		if(colLadderArray[startIdx] == NORMAL) master.goPath(this, startIdx+1, map);
 		if(colLadderArray[startIdx] == LEFT) master.goPath(this.preLadder, startIdx+1, map);
 		if(colLadderArray[startIdx] == RIGHT) master.goPath(this.postLadder, startIdx+1, map);
@@ -66,6 +76,10 @@ public class LadderCol {
 				colString += "★";
 			else colString += "━";
 
+			/**
+			 * LadderCol의 drawCol method의 다음 if/else 제거해 본다.
+			 * Direction과 같은 enum 클래스를 만든 후 제거할 수 있는 방법을 찾아본다. from javajigi
+			 */
 			if (i == LEFT)
 				colString += "┻";
 			else if (i == RIGHT)
@@ -78,6 +92,9 @@ public class LadderCol {
 
 	public boolean checkBlank(int rowNum) {
 		if(colLadderArray[rowNum] == 0) return true;
+		/**
+		 * 이런 경우 굳이 else를 사용하지 않아도 된다.
+		 */
 		else return false;
 	}
 }
